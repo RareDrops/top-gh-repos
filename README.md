@@ -1,5 +1,5 @@
 # top-gh-repos
- 
+![Image](https://github.com/user-attachments/assets/564b907d-bbed-45fe-9f80-6b38e57c145d)
 A simple command line interface tool to query the top starred github repository within a specified date
 
 ## Features
