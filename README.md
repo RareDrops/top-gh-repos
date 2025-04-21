@@ -34,6 +34,11 @@ This allows you to use the command in terminal with:
 top-gh-repos
 ```
 
+To uninstall the command, use:
+```bash
+npm uninstall -g top-gh-repos
+```
+
 
 ## Usage
 
@@ -41,7 +46,7 @@ top-gh-repos
 ```bash
 top-gh-repos [options]
 ```
-or if you opted out installing the command globally, use:
+or if you didn't install the command globally, use:
 ```bash
 npx top-gh-repos [options]
 ```
