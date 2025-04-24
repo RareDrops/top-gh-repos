@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const apiUrl = "https://api.github.com"
 
+// gets argument from CLI
 const [nodePath, scriptPath, startDate, endDate, limit] = process.argv;
 
 async function getTopRepos(startDate, endDate, limit=5) {
@@ -27,18 +28,21 @@ async function getTopRepos(startDate, endDate, limit=5) {
 
 	// date query
 	var dateQuery = 'stars:>0';
+	// if only endDate is passed as an argument, query everything before this date
 	if (!startDate && endDate) {
 		var dateQuery = `created:<${endDate}`;
 	}
+	// if only startDate is passed as an argument, query everything after this date
 	else if (!endDate && startDate) {
 		var dateQuery = `created:>${startDate}`;
 	}
+	// if both startDate and endDate are passed as an argument, query everything in between these dates.
 	else if (startDate && endDate) {
 		var dateQuery = `created:${startDate}..${endDate}`;
 	}
 
-	const sortQuery = 'sort=stars'
-	const orderQuery = 'order=desc'
+	const sortQuery = 'sort=stars' // sort by stars
+	const orderQuery = 'order=desc' // descending order
 	const perPageQuery = `per_page=${limit}`; // Limit to 5 repositories
 
 	// Build the query string dynamically
@@ -62,9 +66,9 @@ async function getTopRepos(startDate, endDate, limit=5) {
 	}
 	console.log("Full Url: " + fullUrl)
 
-	let results_list = []
 	// Build the data table
 	const data_items = response.data["items"]
+	let results_list = []
 
 	for (let i = 0; i < response.data["items"].length; i++) {
 		var data_attr = data_items[i]
@@ -82,6 +86,7 @@ async function getTopRepos(startDate, endDate, limit=5) {
 	return results_list;
 }
 
-// placeholder
+
 const topRepos = await getTopRepos(startDate, endDate, limit)
+// Prints the result into console
 console.log(topRepos)
